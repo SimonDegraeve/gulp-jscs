@@ -6,6 +6,7 @@ var gulp = require('gulp'),
     istanbul = require('gulp-istanbul'),
     plumber = require('gulp-plumber'),
     coveralls = require('gulp-coveralls'),
+    complexity = require('gulp-complexity'),
     jshint = require('gulp-jshint'),
     jscs = require('./lib/plugin'),
     jscsStylish = require('jscs-stylish'),
@@ -39,7 +40,7 @@ gulp.task('test', ['lint'], function(done) {
 });
 
 gulp.task('watch:test', ['test'], function() {
-  watch(paths['src.tests'], {name: 'src.tests', read: false}, function() {
+  watch([paths['src.scripts'], paths['src.tests']], {name: 'src.tests', read: false}, function() {
     gulp.start('test');
   });
 });
@@ -52,7 +53,13 @@ gulp.task('lint', function() {
     .pipe(jshint.reporter('fail'))
     .pipe(jscs())
     .pipe(jscs.reporter(jscsStylish))
-    .pipe(jscs.reporter('fail'));
+    .pipe(jscs.reporter('fail'))
+    .pipe(complexity({
+      cyclomatic: [5, 15, 25],
+      halstead: [15, 20, 25],
+      maintainability: 100,
+      breakOnErrors: false
+    }));
 });
 
 gulp.task('default', ['test']);
