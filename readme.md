@@ -32,7 +32,7 @@ gulp.task('default', function () {
 
       Or a module
       ex: npm install SimonDegraeve/jscs-stylish
-          stylish = require('jshint-stylish');
+          stylish = require('jscs-stylish');
           jscs.reporter(stylish);
     */
 
