@@ -10,13 +10,13 @@ var gulp = require('gulp'),
     jscsStylish = require('jscs-stylish'),
     jshintStylish = require('jshint-stylish'),
     paths = {
-      'src.scripts': ['lib/**/*.js', '!lib/**/__test__/*.js'],
-      'src.tests': ['lib/**/__test__', 'lib/**/__test__/*.js'],
-      'src.tests.loader': ['test-loader.js']
+      'src.scripts': 'lib/**/*.js',
+      'src.tests': 'lib/**/__test__/*.js',
+      'src.tests.loader': 'test-loader.js'
     };
 
 gulp.task('test', ['lint'], function(done) {
-  gulp.src(paths['src.scripts'])
+  gulp.src([paths['src.scripts'], '!' + paths['src.tests']])
     .pipe(istanbul({
       includeUntested: true
     }))
@@ -38,7 +38,7 @@ gulp.task('watch:test', ['test'], function() {
 });
 
 gulp.task('lint', function() {
-  return gulp.src(paths['src.scripts'].concat(paths['src.tests']))
+  return gulp.src([paths['src.scripts'], paths['src.tests']])
     .pipe(plumber())
     .pipe(jshint())
     .pipe(jshint.reporter(jshintStylish))

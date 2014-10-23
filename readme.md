@@ -1,8 +1,6 @@
-# [gulp](http://gulpjs.com)-jscs [![Build Status](https://travis-ci.org/jscs-dev/gulp-jscs.svg?branch=master)](https://travis-ci.org/jscs-dev/gulp-jscs)
+# [gulp](http://gulpjs.com)-jscs [![Build Status](https://travis-ci.org/SimonDegraeve/gulp-jscs.svg?branch=master)](https://travis-ci.org/SimonDegraeve/gulp-jscs)
 
 > Check JavaScript code style with [jscs](https://github.com/jscs-dev/node-jscs)
-
-![](screenshot.png)
 
 *Issues with the output should be reported on the jscs [issue tracker](https://github.com/jscs-dev/node-jscs/issues).*
 
@@ -10,7 +8,7 @@
 ## Install
 
 ```sh
-$ npm install --save-dev gulp-jscs
+$ npm install --save-dev SimonDegraeve/gulp-jscs
 ```
 
 
@@ -21,8 +19,24 @@ var gulp = require('gulp');
 var jscs = require('gulp-jscs');
 
 gulp.task('default', function () {
-	return gulp.src('src/app.js')
-		.pipe(jscs());
+  return gulp.src('src/app.js')
+    .pipe(jscs());
+    .pipe(jscs.reporter()); // Default: Use the console built-in jscs reporter
+
+    /*
+      You can use any built-in jscs reporters
+      ex: jscs.reporter('text')
+
+      Or a function
+      ex: jscs.reporter(function(errors) { console.log(errors); })
+
+      Or a module
+      ex: npm install SimonDegraeve/jscs-stylish
+          stylish = require('jshint-stylish');
+          jscs.reporter(stylish);
+    */
+    
+    .pipe(jscs.reporter('fail')); // Abort the task
 });
 ```
 
@@ -36,17 +50,23 @@ gulp.task('default', function () {
 Type: `string`  
 Default: `'./.jscsrc'`
 
-Path to the [.jscsrc](https://github.com/jscs-dev/node-jscs#configuration).
+Path to the [.jscsrc](https://github.com/jscs-dev/node-jscs#options).
 
 #### options
 
-Type: `object`
+Type: `object`  
+Default: `{}`
 
-See the jscs [options](https://github.com/jscs-dev/node-jscs#options).
+```js
+{
+  // Use esprima harmony parser
+  esnext: true,
 
-Set `esnext: true` if you want your code to be parsed as ES6 using the harmony
-version of the esprima parser. 
+  // Path to the .jscsrc or any valid jscs options
+  configPath: './.jscsrc'
+}
+```
 
 ## License
 
-MIT © [Sindre Sorhus](http://sindresorhus.com)
+MIT © SimonDegraeve
