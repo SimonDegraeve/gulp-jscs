@@ -42,8 +42,10 @@ gulp.task('lint', function() {
     .pipe(plumber())
     .pipe(jshint())
     .pipe(jshint.reporter(jshintStylish))
+    .pipe(jshint.reporter('fail'))
     .pipe(jscs())
-    .pipe(jscs.reporter(jscsStylish));
+    .pipe(jscs.reporter(jscsStylish))
+    .pipe(jscs.reporter('fail'));
 });
 
 gulp.task('default', ['test']);
