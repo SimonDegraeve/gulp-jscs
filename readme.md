@@ -1,4 +1,4 @@
-# [gulp](http://gulpjs.com)-jscs [![Build Status](https://travis-ci.org/SimonDegraeve/gulp-jscs.svg?branch=master)](https://travis-ci.org/SimonDegraeve/gulp-jscs)[![Coverage Status](https://img.shields.io/coveralls/SimonDegraeve/gulp-jscs.svg)](https://coveralls.io/r/SimonDegraeve/gulp-jscs)
+# [gulp](http://gulpjs.com)-jscs [![Build Status](https://travis-ci.org/SimonDegraeve/gulp-jscs.svg?branch=master)](https://travis-ci.org/SimonDegraeve/gulp-jscs) [![Coverage Status](https://img.shields.io/coveralls/SimonDegraeve/gulp-jscs.svg)](https://coveralls.io/r/SimonDegraeve/gulp-jscs)
 
 > Check JavaScript code style with [jscs](https://github.com/jscs-dev/node-jscs)
 

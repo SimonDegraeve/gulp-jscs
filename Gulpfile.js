@@ -16,6 +16,11 @@ var gulp = require('gulp'),
       'src.tests.loader': 'test-loader.js'
     };
 
+gulp.task('coveralls', function() {
+  gulp.src('./coverage/**/lcov.info')
+    .pipe(coveralls());
+});
+
 gulp.task('test', ['lint'], function(done) {
   gulp.src([paths['src.scripts'], '!' + paths['src.tests']])
     .pipe(istanbul({
@@ -26,7 +31,8 @@ gulp.task('test', ['lint'], function(done) {
         .pipe(plumber())
         .pipe(mocha())
         .pipe(istanbul.writeReports({
-          reporters: ['text', 'text-summary']
+          dir: './coverage',
+          reporters: ['lcov', 'text', 'text-summary']
         }))
         .on('end', done);
     });
